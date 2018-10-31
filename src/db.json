@@ -1,0 +1,19 @@
+[{
+  "price": 1820300,
+  "countRoom": "1-комнатная",
+  "quadrature": 34.6,
+  "isMortgage": true,
+  "isInstallment": false
+}, {
+  "price": 2820300,
+  "countRoom": "2-комнатная",
+  "quadrature": 44.6,
+  "isMortgage": true,
+  "isInstallment": true
+}, {
+  "price": 3820300,
+  "countRoom": "3-комнатная",
+  "quadrature": 54.6,
+  "isMortgage": false,
+  "isInstallment": false
+}]
