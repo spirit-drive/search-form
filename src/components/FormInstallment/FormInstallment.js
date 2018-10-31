@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 class FormInstallment extends Component {
     render () {
-        return <input type="text" defaultValue="3-комнатная" name="installment"/>
+        return (
+            <div>
+                <span>Рассрочка </span><input type="checkbox" name="installment"/>
+            </div>
+        )
+
     }
 }
 

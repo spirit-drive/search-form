@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 
 class FormMortgage extends Component {
     render () {
-        return <input type="text" defaultValue="3-комнатная" name="mortgage"/>
+        return (
+            <div>
+                <span>Ипотека </span><input type="checkbox" name="mortgage"/>
+            </div>
+        )
     }
 }
 
