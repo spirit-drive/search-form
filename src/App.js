@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchForm from "./components/SearchForm/SearchForm";
+import ResultSearch from "./components/ResultSearch/ResultSearch";
 
 class App extends Component {
 
@@ -7,7 +8,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            data: "",
+            data: [],
         };
 
         this.setData = this.setData.bind(this);
@@ -18,7 +19,7 @@ class App extends Component {
     }
 
     setData (data) {
-        data = this._toPrepareData(data);
+        // data = this._toPrepareData(data);
         console.log(data);
         this.setState({data});
     }
@@ -27,7 +28,7 @@ class App extends Component {
         return (
             <div>
                 <SearchForm showResult={this.setData}/>
-                <div>{this.state.data}</div>
+                <ResultSearch data={this.state.data}/>
             </div>
         )
     }
