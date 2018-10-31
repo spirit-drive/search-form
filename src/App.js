@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import SearchForm from "./components/SearchForm/SearchForm";
 
 class App extends Component {
     render () {
         return (
-            <div>!</div>
+            <div>
+                <SearchForm/>
+            </div>
         )
     }
 }
