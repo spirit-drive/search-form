@@ -1,174 +1,174 @@
 [{
   "price": 1145800,
-  "countRoom": "Студия",
+  "type": "Студия",
   "quadrature": 16,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 1164800,
-  "countRoom": "Студия",
+  "type": "Студия",
   "quadrature": 20,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 1176000,
-  "countRoom": "Студия",
+  "type": "Студия",
   "quadrature": 24,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 1176000,
-  "countRoom": "Студия",
+  "type": "Студия",
   "quadrature": 24,
   "isMortgage": false,
   "isInstallment": false
 }, {
   "price": 1200500,
-  "countRoom": "Студия",
+  "type": "Студия",
   "quadrature": 24,
   "isMortgage": false,
   "isInstallment": true
 }, {
   "price": 1233322,
-  "countRoom": "1-комнатная",
+  "type": "1-комнатная",
   "quadrature": 42,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 1542500,
-  "countRoom": "1-комнатная",
+  "type": "1-комнатная",
   "quadrature": 24,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 1820300,
-  "countRoom": "1-комнатная",
+  "type": "1-комнатная",
   "quadrature": 34.6,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 2147546,
-  "countRoom": "2-комнатная",
+  "type": "2-комнатная",
   "quadrature": 61,
   "isMortgage": true,
   "isInstallment": true
 }, {
   "price": 2232100,
-  "countRoom": "2-комнатная",
+  "type": "2-комнатная",
   "quadrature": 44,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 2254200,
-  "countRoom": "2-комнатная",
+  "type": "2-комнатная",
   "quadrature": 44,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 2262400,
-  "countRoom": "2-комнатная",
+  "type": "2-комнатная",
   "quadrature": 44,
   "isMortgage": true,
   "isInstallment": true
 }, {
   "price": 2276300,
-  "countRoom": "2-комнатная",
+  "type": "2-комнатная",
   "quadrature": 61,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 3168258,
-  "countRoom": "3-комнатная",
+  "type": "3-комнатная",
   "quadrature": 71,
   "isMortgage": false,
   "isInstallment": false
 }, {
   "price": 3242100,
-  "countRoom": "3-комнатная",
+  "type": "3-комнатная",
   "quadrature": 64,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 3242100,
-  "countRoom": "3-комнатная",
+  "type": "3-комнатная",
   "quadrature": 64,
   "isMortgage": false,
   "isInstallment": true
 }, {
   "price": 3306300,
-  "countRoom": "3-комнатная",
+  "type": "3-комнатная",
   "quadrature": 64,
   "isMortgage": true,
   "isInstallment": true
 }, {
   "price": 4018500,
-  "countRoom": "4-комнатная",
+  "type": "4-комнатная",
   "quadrature": 89,
   "isMortgage": false,
   "isInstallment": false
 }, {
   "price": 4896840,
-  "countRoom": "4-комнатная",
+  "type": "4-комнатная",
   "quadrature": 62,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 5020400,
-  "countRoom": "4-комнатная",
+  "type": "4-комнатная",
   "quadrature": 65,
   "isMortgage": false,
   "isInstallment": true
 }, {
   "price": 5108400,
-  "countRoom": "4-комнатная",
+  "type": "4-комнатная",
   "quadrature": 61,
   "isMortgage": true,
   "isInstallment": true
 }, {
   "price": 10396933,
-  "countRoom": "5-комнатная",
+  "type": "5-комнатная",
   "quadrature": 109,
   "isMortgage": false,
   "isInstallment": false
 }, {
   "price": 10409268,
-  "countRoom": "5-комнатная",
+  "type": "5-комнатная",
   "quadrature": 115,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 10563930,
-  "countRoom": "5-комнатная",
+  "type": "5-комнатная",
   "quadrature": 107,
   "isMortgage": false,
   "isInstallment": true
 }, {
   "price": 10599676,
-  "countRoom": "5-комнатная",
+  "type": "5-комнатная",
   "quadrature": 107,
   "isMortgage": true,
   "isInstallment": true
 }, {
   "price": 43252720,
-  "countRoom": "6-комнатная",
+  "type": "6-комнатная",
   "quadrature": 181,
   "isMortgage": false,
   "isInstallment": false
 }, {
   "price": 43887250,
-  "countRoom": "6-комнатная",
+  "type": "6-комнатная",
   "quadrature": 181,
   "isMortgage": true,
   "isInstallment": false
 }, {
   "price": 44521770,
-  "countRoom": "6-комнатная",
+  "type": "6-комнатная",
   "quadrature": 181,
   "isMortgage": false,
   "isInstallment": true
 }, {
   "price": 45156290,
-  "countRoom": "6-комнатная",
+  "type": "6-комнатная",
   "quadrature": 181,
   "isMortgage": true,
   "isInstallment": true

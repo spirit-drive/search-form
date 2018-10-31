@@ -19,15 +19,13 @@ class App extends Component {
     }
 
     setData (data) {
-        // data = this._toPrepareData(data);
-        console.log(data);
         this.setState({data});
     }
 
     render () {
         return (
             <div>
-                <SearchForm showResult={this.setData}/>
+                <SearchForm liftResult={this.setData}/>
                 <ResultSearch data={this.state.data}/>
             </div>
         )

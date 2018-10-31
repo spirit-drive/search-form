@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import db from "../../db";
+import FormType from "../FormType/FormType";
+import FormPrice from "../FormPrice/FormPrice";
+import FormMortgage from "../FormMortgage/FormMortgage";
+import FormInstallment from "../FormInstallment/FormInstallment";
+import search from "../../db/search";
+
 
 class SearchForm extends Component {
 
@@ -7,21 +12,28 @@ class SearchForm extends Component {
         super(props);
 
         this.state = {
-            data: db,
+            data: [],
         };
 
     }
 
-    liftResult (data) {
+    liftResult () {
         return e => {
             e.preventDefault();
-            this.props.showResult(data);
+            const data = {
+                type: e.currentTarget.text.value,
+            };
+            this.props.liftResult(search(data));
         }
     }
 
     render () {
         return (
-            <form onSubmit={this.liftResult(this.state.data)}>
+            <form onSubmit={this.liftResult()}>
+                <FormType />
+                <FormPrice />
+                <FormMortgage />
+                <FormInstallment />
                 <input type="submit" value="Найти"/>
             </form>
         )
