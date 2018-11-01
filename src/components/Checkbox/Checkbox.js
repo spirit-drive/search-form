@@ -10,17 +10,18 @@ class Checkbox extends Component {
         super(props);
 
         this.state = {
-            checked: this.props.value
+            value: this.props.value
         }
     }
 
     _onChange = () => {
-        const checked = !this.state.checked;
-        this.props.liftUpState({value: checked, text: this.props.text});
-        this.setState({checked});
+        const value = !this.state.value;
+        this.props.liftUpState({value, text: this.props.text});
+        this.setState({value});
     };
 
     render() {
+        // console.log(this.props.value, this.props.text);
         return (
             <Checkbox_ className={this.props.className}>
                 <label>
@@ -28,7 +29,7 @@ class Checkbox extends Component {
                     <input
                         className="checkbox__box"
                         onChange={this._onChange}
-                        checked={this.state.checked}
+                        checked={this.state.value}
                         type="checkbox"
                         name={this.props.name}
                     />

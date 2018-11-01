@@ -14,20 +14,22 @@ class ListCheckboxes extends Component {
     render() {
         return (
             <ListCheckboxes_ className={this.props.className}>
-                {this.props.items.map((item, i) => (
-                    <li
-                        key={`ListCheckboxes_li_df22c4_${i}`}
-                        className="list-checkboxes__item"
-                    >
-                        <Checkbox
-                            className="list-checkboxes__checkbox"
-                            liftUpState={this._liftUpState(i)}
-                            valueToTheLeft={false}
-                            text={item.text}
-                            value={item.value}
-                        />
-                    </li>
-                ))}
+                {this.props.items.map((item, i) => {
+                    return (
+                        <li
+                            key={`ListCheckboxes_li_df22c4_${i}`}
+                            className="list-checkboxes__item"
+                        >
+                            <Checkbox
+                                className="list-checkboxes__checkbox"
+                                liftUpState={this._liftUpState(i)}
+                                valueToTheLeft={false}
+                                text={item.text}
+                                value={item.value}
+                            />
+                        </li>
+                    )
+                })}
             </ListCheckboxes_>
         )
     }

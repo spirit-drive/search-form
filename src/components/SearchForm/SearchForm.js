@@ -4,8 +4,31 @@ import FormPrice from "../FormPrice/FormPrice";
 import FormMortgage from "../FormMortgage/FormMortgage";
 import FormInstallment from "../FormInstallment/FormInstallment";
 import MultiSelect from "../MultiSelect/MultiSelect";
+import PriceSlider from "../PriceSlider/PriceSlider";
 import search from "../../db/search";
 
+const listItems = [{
+    value: false,
+    text: 'Студия',
+}, {
+    value: false,
+    text: '1-комнатная',
+}, {
+    value: false,
+    text: '2-комнатная',
+}, {
+    value: false,
+    text: '3-комнатная',
+}, {
+    value: false,
+    text: '4-комнатная',
+}, {
+    value: false,
+    text: '5-комнатная',
+}, {
+    value: false,
+    text: '6-комнатная',
+}];
 
 class SearchForm extends Component {
 
@@ -39,19 +62,19 @@ class SearchForm extends Component {
         this.setState({data});
     };
 
-    _createContent (array) {
-        if (!Array.isArray(array)) throw new Error(`${JSON.stringify(array)} должен быть массивом`);
-        array.forEach(item => {if (!(item.Component.prototype instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
-
-        return array.map((item, i) => (
-            <item.Component
-                data={this.state.data[item.name]}
-                name={item.name}
-                key={`SearchForm_Item_urn24f43_${i}`}
-                onChange={this.onChange}
-            />
-        ))
-    }
+    // _createContent (array) {
+    //     if (!Array.isArray(array)) throw new Error(`${JSON.stringify(array)} должен быть массивом`);
+    //     array.forEach(item => {if (!(item.Component.prototype instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
+    //
+    //     return array.map((item, i) => (
+    //         <item.Component
+    //             data={this.state.data[item.name]}
+    //             name={item.name}
+    //             key={`SearchForm_Item_urn24f43_${i}`}
+    //             onChange={this.onChange}
+    //         />
+    //     ))
+    // }
 
     render () {
         return (
@@ -60,29 +83,9 @@ class SearchForm extends Component {
                     onChange={this.onChange}
                     name="type"
                     placeholder='Кол-во комнат:'
-                    items={[{
-                        value: false,
-                        text: 'Студия',
-                    }, {
-                        value: false,
-                        text: '1-комнатная',
-                    }, {
-                        value: false,
-                        text: '2-комнатная',
-                    }, {
-                        value: false,
-                        text: '3-комнатная',
-                    }, {
-                        value: false,
-                        text: '4-комнатная',
-                    }, {
-                        value: false,
-                        text: '5-комнатная',
-                    }, {
-                        value: false,
-                        text: '6-комнатная',
-                    }]}
+                    items={listItems}
                 />
+                <PriceSlider />
                 {/*{this._createContent([{*/}
                     {/*Component: FormType,*/}
                     {/*name: 'type'*/}

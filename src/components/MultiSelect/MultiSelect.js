@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Field from "../Field/Field";
 import ListCheckboxes from "../ListCheckboxes/ListCheckboxes";
+import createComponent from "../../lib/createComponent";
+const MultiSelect_ = createComponent('multi-select');
+
 
 class MultiSelect extends Component {
 
@@ -20,7 +23,7 @@ class MultiSelect extends Component {
     }
 
     _change(value) {
-        this.props.onChange(this._getArrayText(value), this.props.name);
+        this.props.onChange && this.props.onChange(this._getArrayText(value), this.props.name);
     }
 
     changeValue = value => {
@@ -28,10 +31,23 @@ class MultiSelect extends Component {
         this.setState({value});
     };
 
-    showOrHideList = () => {
+    _showOrHideList = e => {
+        e.stopPropagation();
         const isOpen = !this.state.isOpen;
         this.setState({isOpen});
     };
+
+    _hideList = () => this.setState({isOpen: false});
+
+    _cancelHide = e => e.stopPropagation();
+
+    componentDidMount () {
+        window.addEventListener('click', this._hideList);
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('click', this._hideList);
+    }
 
     reset = () => {
         const value = this.state.value.map(item => ({value: false, text: item.text}));
@@ -42,20 +58,23 @@ class MultiSelect extends Component {
 
     render () {
         return (
-            <div className="multi-select">
-                <div onClick={this.showOrHideList}>
-                    <Field
-                        reset={this.reset}
-                        placeholder={this.props.placeholder}
-                        value={this._getStringFromValue()}
-                    />
+            <MultiSelect_ className={this.props.className}>
+                <div onClick={this._cancelHide}>
+                    <div onClick={this._showOrHideList}>
+                        <Field
+                            reset={this.reset}
+                            placeholder={this.props.placeholder}
+                            value={this._getStringFromValue()}
+                        />
+                    </div>
+                    {this.state.isOpen &&
+                    <ListCheckboxes
+                        liftUpState={this.changeValue}
+                        className="multi-select__list-checkboxes"
+                        items={this.state.value}
+                    />}
                 </div>
-                {this.state.isOpen && <ListCheckboxes
-                    liftUpState={this.changeValue}
-                    className="multi-select__list-checkboxes"
-                    items={this.state.value}
-                />}
-            </div>
+            </MultiSelect_>
         )
     }
 }
