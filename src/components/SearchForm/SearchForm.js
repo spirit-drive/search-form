@@ -14,7 +14,7 @@ class SearchForm extends Component {
 
         this.state = {
             data: {
-                type: ["1-комнатная", "Студия"],
+                type: [],
                 price: {
                     min: 0,
                     max: Infinity,
@@ -56,7 +56,33 @@ class SearchForm extends Component {
     render () {
         return (
             <form className="search-form" onSubmit={this.liftUpResult}>
-                <MultiSelect />
+                <MultiSelect
+                    onChange={this.onChange}
+                    name="type"
+                    placeholder='Кол-во комнат:'
+                    items={[{
+                        value: false,
+                        text: 'Студия',
+                    }, {
+                        value: false,
+                        text: '1-комнатная',
+                    }, {
+                        value: false,
+                        text: '2-комнатная',
+                    }, {
+                        value: false,
+                        text: '3-комнатная',
+                    }, {
+                        value: false,
+                        text: '4-комнатная',
+                    }, {
+                        value: false,
+                        text: '5-комнатная',
+                    }, {
+                        value: false,
+                        text: '6-комнатная',
+                    }]}
+                />
                 {/*{this._createContent([{*/}
                     {/*Component: FormType,*/}
                     {/*name: 'type'*/}
@@ -70,7 +96,7 @@ class SearchForm extends Component {
                     {/*Component: FormInstallment,*/}
                     {/*name: 'installment'*/}
                 {/*}])}*/}
-                {/*<input type="submit" value="Найти"/>*/}
+                <input type="submit" value="Найти"/>
             </form>
         )
     }

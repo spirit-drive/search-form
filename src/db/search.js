@@ -1,6 +1,7 @@
 import db from "./db";
 
 const checkType = (item, data) => {
+    if (!data.type.length || !data.type) return true;
     if (Array.isArray(data.type)) {
         for (let type of data.type) {
             if (item.type === type) return true;
@@ -28,7 +29,6 @@ const checkInstallment = (item, data) => {
 };
 
 const filter = (item, data) => {
-
     return checkType(item, data)
         && checkPrice(item, data)
         && checkMortgage(item, data)

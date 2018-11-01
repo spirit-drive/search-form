@@ -11,7 +11,15 @@ class Field extends Component {
         }
     }
 
-    reset = () => this.setState({value: ''});
+    componentWillReceiveProps ({value}) {
+        this.setState({value});
+    }
+
+    reset = e => {
+        e.stopPropagation();
+        this.props.reset && this.props.reset();
+        this.setState({value: ''});
+    };
 
     render () {
         return (
