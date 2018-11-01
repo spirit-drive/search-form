@@ -12,48 +12,70 @@ class SearchForm extends Component {
         super(props);
 
         this.state = {
-            data: {},
+            data: {
+                type: "1-комнатная",
+                price: {
+                    min: 0,
+                    max: Infinity,
+                },
+                mortgage: false,
+                isInstallment: false,
+            },
         };
-
-        this.liftResult = this.liftResult.bind(this);
-        this.onChange = this.onChange.bind(this);
-
     }
 
-    liftResult (e) {
+    liftUpResult = e => {
         e.preventDefault();
-        const _data = {
-            type: e.currentTarget.text.value,
-            price: {
-                min: e.currentTarget.min.value,
-                max: e.currentTarget.max.value,
-            },
-            isMortgage: e.currentTarget.mortgage.checked,
-            isInstallment: e.currentTarget.installment.checked,
-        };
-        const data = search(_data);
-        this.props.liftResult(data);
-        this.setState({data})
+
+        const data = search(this.state.data);
+        this.props.liftUpResult(data);
     };
 
-    onChange (value, properties) {
+    onChange = (value, properties) => {
         const data = {...this.state.data};
         data[properties] = value;
+        console.log(data);
         this.setState({data});
+    };
+
+    _createContent (array) {
+        if (!Array.isArray(array)) throw new Error(`${JSON.stringify(array)} должен быть массивом`);
+        // array.forEach(Item => {if ((Item instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
+
+        return array.map((item, i) => (
+            <item.Component
+                data={this.state.data[item.name]}
+                name={item.name}
+                key={`SearchForm_Item_urn24f43_${i}`}
+                onChange={this.onChange}
+            />
+        ))
     }
 
     render () {
-        console.log(this.state.data);
         return (
-            <form onSubmit={this.liftResult}>
-                <FormType onChange={this.onChange}/>
-                <FormPrice />
-                <FormMortgage />
-                <FormInstallment />
+            <form onSubmit={this.liftUpResult}>
+                {this._createContent([{
+                    Component: FormType,
+                    name: 'type'
+                }, {
+                    Component: FormPrice,
+                    name: 'price'
+                }, {
+                    Component: FormMortgage,
+                    name: 'mortgage'
+                }, {
+                    Component: FormInstallment,
+                    name: 'installment'
+                }])}
                 <input type="submit" value="Найти"/>
             </form>
         )
     }
 }
+
+// SearchForm.defaultProps = {
+//     data:
+// };
 
 export default SearchForm;

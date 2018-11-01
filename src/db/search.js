@@ -1,14 +1,38 @@
 import db from "./db";
 
-const filter = (item, data) => {
-    const min = data.price.min || 0;
-    const max = data.price.max || 10 ** 10;
+const checkType = (item, data) => {
+    if (Array.isArray(data)) {
+        for (let type of data) {
+            if (item.type === type) return true;
+        }
+        return false;
+    } else {
+        return item.type === data.type;
+    }
+};
 
-    return item.type === data.type
-        && item.price >= min
-        && item.price <= max
-        && item.isMortgage === data.isMortgage
-        && item.isInstallment === data.isInstallment
+const checkPrice = (item, data) => {
+    const min = data.price.min || 0;
+    const max = data.price.max || Infinity;
+
+    return item.price >= min && item.price <= max;
+
+};
+
+const checkMortgage = (item, data) => {
+    return !data.mortgage || item.isMortgage === data.mortgage;
+};
+
+const checkInstallment = (item, data) => {
+    return !data.installment || item.isInstallment === data.installment;
+};
+
+const filter = (item, data) => {
+
+    return checkType(item, data)
+        && checkPrice(item, data)
+        && checkMortgage(item, data)
+        && checkInstallment(item, data);
 };
 
 const search = data => db.filter(item => filter(item, data));

@@ -25,7 +25,7 @@ class App extends Component {
     render () {
         return (
             <div>
-                <SearchForm liftResult={this.setData}/>
+                <SearchForm liftUpResult={this.setData}/>
                 <ResultSearch data={this.state.data}/>
             </div>
         )
