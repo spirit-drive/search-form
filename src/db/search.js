@@ -1,8 +1,8 @@
 import db from "./db";
 
 const checkType = (item, data) => {
-    if (Array.isArray(data)) {
-        for (let type of data) {
+    if (Array.isArray(data.type)) {
+        for (let type of data.type) {
             if (item.type === type) return true;
         }
         return false;

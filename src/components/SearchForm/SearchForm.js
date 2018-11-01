@@ -3,6 +3,7 @@ import FormType from "../FormType/FormType";
 import FormPrice from "../FormPrice/FormPrice";
 import FormMortgage from "../FormMortgage/FormMortgage";
 import FormInstallment from "../FormInstallment/FormInstallment";
+import MultiSelect from "../MultiSelect/MultiSelect";
 import search from "../../db/search";
 
 
@@ -13,7 +14,7 @@ class SearchForm extends Component {
 
         this.state = {
             data: {
-                type: "1-комнатная",
+                type: ["1-комнатная", "Студия"],
                 price: {
                     min: 0,
                     max: Infinity,
@@ -40,7 +41,7 @@ class SearchForm extends Component {
 
     _createContent (array) {
         if (!Array.isArray(array)) throw new Error(`${JSON.stringify(array)} должен быть массивом`);
-        // array.forEach(Item => {if ((Item instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
+        array.forEach(item => {if (!(item.Component.prototype instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
 
         return array.map((item, i) => (
             <item.Component
@@ -54,28 +55,25 @@ class SearchForm extends Component {
 
     render () {
         return (
-            <form onSubmit={this.liftUpResult}>
-                {this._createContent([{
-                    Component: FormType,
-                    name: 'type'
-                }, {
-                    Component: FormPrice,
-                    name: 'price'
-                }, {
-                    Component: FormMortgage,
-                    name: 'mortgage'
-                }, {
-                    Component: FormInstallment,
-                    name: 'installment'
-                }])}
-                <input type="submit" value="Найти"/>
+            <form className="search-form" onSubmit={this.liftUpResult}>
+                <MultiSelect />
+                {/*{this._createContent([{*/}
+                    {/*Component: FormType,*/}
+                    {/*name: 'type'*/}
+                {/*}, {*/}
+                    {/*Component: FormPrice,*/}
+                    {/*name: 'price'*/}
+                {/*}, {*/}
+                    {/*Component: FormMortgage,*/}
+                    {/*name: 'mortgage'*/}
+                {/*}, {*/}
+                    {/*Component: FormInstallment,*/}
+                    {/*name: 'installment'*/}
+                {/*}])}*/}
+                {/*<input type="submit" value="Найти"/>*/}
             </form>
         )
     }
 }
-
-// SearchForm.defaultProps = {
-//     data:
-// };
 
 export default SearchForm;

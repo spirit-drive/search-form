@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SearchForm from "./components/SearchForm/SearchForm";
-import ResultSearch from "./components/ResultSearch/ResultSearch";
+import SearchForm from "../SearchForm/SearchForm";
+import ResultSearch from "../ResultSearch/ResultSearch";
 
 class App extends Component {
 
@@ -24,7 +24,8 @@ class App extends Component {
 
     render () {
         return (
-            <div>
+            <div className="app">
+                <h1 className="app__title">Купить квартиру</h1>
                 <SearchForm liftUpResult={this.setData}/>
                 <ResultSearch data={this.state.data}/>
             </div>
