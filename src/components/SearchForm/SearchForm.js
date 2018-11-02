@@ -42,22 +42,22 @@ class SearchForm extends Component {
         });
     }
 
-    _search = data => new Promise(resolve => {
+    _search = data => new Promise((resolve, reject) => {
 
         const xhr = new XMLHttpRequest();
         xhr.open("post", `${url}/data`, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         xhr.onload = () => resolve(xhr.responseText);
+        xhr.onerror = reject;
         xhr.send("data=" + JSON.stringify(data));
     });
 
     search(data, func) {
         this._search(data)
             .then(res => JSON.parse(res))
-            .then(founded => {
-                func(founded);
-            });
+            .then(founded => func(founded))
+            .cache(console.error);
     }
 
     liftUpResult = e => {
