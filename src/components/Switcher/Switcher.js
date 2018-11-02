@@ -10,7 +10,7 @@ class Switcher extends Component {
             value: this.props.value
         };
 
-        this.Component = createComponent('switcher', 'div', {onClick: this._onChange});
+        this.Component = createComponent('switcher h_1', 'div', {onClick: this._onChange});
     }
 
     _onChange = () => {
@@ -25,11 +25,7 @@ class Switcher extends Component {
     }
 
     render() {
-        return (
-            <this.Component className={this._getClass()}>
-                {this.props.children}
-            </this.Component>
-        )
+        return <this.Component className={this._getClass()}>{this.props.children}</this.Component>
     }
 }
 

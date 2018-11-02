@@ -6,6 +6,7 @@ import FormInstallment from "../FormInstallment/FormInstallment";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import PriceSlider from "../PriceSlider/PriceSlider";
 import BigSwitcher from "../BigSwitcher/BigSwitcher";
+import Button from "../Button/Button";
 import search from "../../db/search";
 
 const listItems = [{
@@ -44,15 +45,16 @@ class SearchForm extends Component {
                     max: Infinity,
                 },
                 mortgage: false,
-                isInstallment: false,
+                installment: false,
             },
+            founded: []
         };
     }
 
     liftUpResult = e => {
         e.preventDefault();
-
         const data = search(this.state.data);
+        this.setState({founded: data});
         this.props.liftUpResult(data);
     };
 
@@ -60,7 +62,7 @@ class SearchForm extends Component {
         const data = {...this.state.data};
         data[properties] = value;
         console.log(data);
-        this.setState({data});
+        this.setState({data, founded: search(data)});
     };
 
     // _createContent (array) {
@@ -79,7 +81,7 @@ class SearchForm extends Component {
 
     render () {
         return (
-            <form className="search-form" onSubmit={this.liftUpResult}>
+            <form className="search-form">
                 <MultiSelect
                     onChange={this.onChange}
                     name="type"
@@ -90,6 +92,7 @@ class SearchForm extends Component {
                     onChange={this.onChange}
                     data={this.state.data}
                 />
+
                 {/*<PriceSlider />*/}
                 {/*{this._createContent([{*/}
                     {/*Component: FormType,*/}
@@ -104,7 +107,7 @@ class SearchForm extends Component {
                     {/*Component: FormInstallment,*/}
                     {/*name: 'installment'*/}
                 {/*}])}*/}
-                <input type="submit" value="Найти"/>
+                <Button onClick={this.liftUpResult} count={this.state.founded.length} />
             </form>
         )
     }

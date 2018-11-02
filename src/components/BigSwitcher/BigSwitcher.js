@@ -18,8 +18,8 @@ class BigSwitcher extends Component {
                 <Switcher
                     className="big-switcher__children switcher-installment"
                     liftUpState={this.props.onChange}
-                    value={this.props.data.isInstallment}
-                    name="isInstallment"
+                    value={this.props.data.installment}
+                    name="installment"
                 >
                     <p>Рассрочка</p>
                 </Switcher>
