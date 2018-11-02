@@ -57,7 +57,7 @@ class SearchForm extends Component {
         this._search(data)
             .then(res => JSON.parse(res))
             .then(founded => func(founded))
-            .cache(console.error);
+            .catch(console.error);
     }
 
     liftUpResult = e => {
