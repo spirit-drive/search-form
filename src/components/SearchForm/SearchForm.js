@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import FormType from "../FormType/FormType";
-import FormPrice from "../FormPrice/FormPrice";
-import FormMortgage from "../FormMortgage/FormMortgage";
-import FormInstallment from "../FormInstallment/FormInstallment";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import PriceSlider from "../PriceSlider/PriceSlider";
 import BigSwitcher from "../BigSwitcher/BigSwitcher";
 import Button from "../Button/Button";
 import search from "../../../server/db/search";
 import {url} from "../../setting";
+import createComponent from "../../lib/createComponent";
+
+
+
+const Form = createComponent('search-form', 'form');
+
 
 const listItems = [{
     value: false,
@@ -32,6 +34,7 @@ const listItems = [{
     value: false,
     text: '6-комнатная',
 }];
+
 
 class SearchForm extends Component {
 
@@ -99,23 +102,9 @@ class SearchForm extends Component {
         this.setState({data, founded: search(data)});
     };
 
-    // _createContent (array) {
-    //     if (!Array.isArray(array)) throw new Error(`${JSON.stringify(array)} должен быть массивом`);
-    //     array.forEach(item => {if (!(item.Component.prototype instanceof Component)) throw new Error(`Все элементы массива должны быть компонентами React`)});
-    //
-    //     return array.map((item, i) => (
-    //         <item.Component
-    //             data={this.state.data[item.name]}
-    //             name={item.name}
-    //             key={`SearchForm_Item_urn24f43_${i}`}
-    //             onChange={this.onChange}
-    //         />
-    //     ))
-    // }
-
     render () {
         return (
-            <form className="search-form">
+            <Form className={this.props.className}>
                 <div className="search-form__item">
                     <MultiSelect
                         onChange={this.onChange}
@@ -123,6 +112,9 @@ class SearchForm extends Component {
                         placeholder='Кол-во комнат:'
                         items={listItems}
                     />
+                </div>
+                <div className="search-form__item">
+                    <PriceSlider />
                 </div>
                 <div className="search-form__item">
                     <BigSwitcher
@@ -134,21 +126,7 @@ class SearchForm extends Component {
                     <Button onClick={this.liftUpResult} count={this.state.founded.length} />
                 </div>
 
-                {/*<PriceSlider />*/}
-                {/*{this._createContent([{*/}
-                    {/*Component: FormType,*/}
-                    {/*name: 'type'*/}
-                {/*}, {*/}
-                    {/*Component: FormPrice,*/}
-                    {/*name: 'price'*/}
-                {/*}, {*/}
-                    {/*Component: FormMortgage,*/}
-                    {/*name: 'mortgage'*/}
-                {/*}, {*/}
-                    {/*Component: FormInstallment,*/}
-                    {/*name: 'installment'*/}
-                {/*}])}*/}
-            </form>
+            </Form>
         )
     }
 }

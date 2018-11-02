@@ -28,21 +28,15 @@ class Button extends Component {
         const number = Math.floor(count % 10);
         const fullDec = dec + number;
 
-        console.log(dec);
-
         if (fullDec >= 11 && fullDec <= 14) return declinations[2];
 
 
-        let end;
-        if (number === 1) {
-            end = declinations[0];
-        } else if (number > 1 && number < 5) {
-            end = declinations[1];
-        } else {
-            end = declinations[2];
-        }
+        return number === 1
+            ? declinations[0]
+            : number > 1 && number < 5
+                ? declinations[1]
+                : declinations[2];
 
-        return end;
     }
 
     _getText () {
