@@ -38,6 +38,9 @@ class SearchForm extends Component {
     constructor(props) {
         super(props);
 
+        // this.search(null, founded => {
+        //
+        // });
         const founded = search();
         const prices = founded.map(item => item.price);
         this.price = {
@@ -82,11 +85,11 @@ class SearchForm extends Component {
 
     liftUpResult = e => {
         e.preventDefault();
-        const data = search(this.state.data);
         // this.search(this.state.data, founded => {
         //     this.setState({founded});
         //     this.props.liftUpResult(founded);
         // });
+        const data = search(this.state.data);
         this.setState({founded: data});
         this.props.liftUpResult(data);
     };
@@ -97,12 +100,6 @@ class SearchForm extends Component {
         // console.log(data);
         // this.search(data, founded => this.setState({data, founded}));
 
-        // this._search(data)
-        //     .then(res => JSON.parse(res))
-        //     .then(founded => {
-        //         // console.log(founded);
-        //         this.setState({data, founded});
-        //     });
 
         this.setState({data, founded: search(data)});
     };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import getBeautifulNumber from '../../lib/getBeautifulNumber';
 
 class InputNumber extends Component {
     constructor(props){
@@ -21,7 +22,7 @@ class InputNumber extends Component {
     }
 
     _getBeautifulValue (value) {
-        return value === '' ? '' : Number(value).toLocaleString('ru-Ru', {useGrouping: true});
+        return value === '' ? '' : getBeautifulNumber(value);
     }
 
     _getNumber (value) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import createComponent from "../../lib/createComponent";
 import getPosition from "../../lib/getPosition";
+import getBeautifulNumber from "../../lib/getBeautifulNumber";
 const RangeSlider_ = createComponent('range-slider');
 
 class SliderBasis extends Component {
@@ -178,11 +179,6 @@ class RangeSlider extends SliderWithVisualLogic {
         return {min: left, max: right};
     }
 
-    _getBeautifulValue (value) {
-        return Number(value).toLocaleString('ru-Ru', {useGrouping: true});
-    }
-
-
     render() {
         const {min: left, max: right} = this.state.values;
         const {min, max} = this.props;
@@ -201,8 +197,8 @@ class RangeSlider extends SliderWithVisualLogic {
                     </div>
                 </div>
                 <div className="range-slider__marks">
-                    <span className="range-slider__mark range-slider__mark_left">{this._getBeautifulValue(min)}</span>
-                    <span className="range-slider__mark range-slider__mark_right">{this._getBeautifulValue(max)}</span>
+                    <span className="range-slider__mark range-slider__mark_left">{getBeautifulNumber(min)}</span>
+                    <span className="range-slider__mark range-slider__mark_right">{getBeautifulNumber(max)}</span>
                 </div>
             </RangeSlider_>
         )
