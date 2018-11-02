@@ -5,6 +5,7 @@ import FormMortgage from "../FormMortgage/FormMortgage";
 import FormInstallment from "../FormInstallment/FormInstallment";
 import MultiSelect from "../MultiSelect/MultiSelect";
 import PriceSlider from "../PriceSlider/PriceSlider";
+import BigSwitcher from "../BigSwitcher/BigSwitcher";
 import search from "../../db/search";
 
 const listItems = [{
@@ -85,7 +86,11 @@ class SearchForm extends Component {
                     placeholder='Кол-во комнат:'
                     items={listItems}
                 />
-                <PriceSlider />
+                <BigSwitcher
+                    onChange={this.onChange}
+                    data={this.state.data}
+                />
+                {/*<PriceSlider />*/}
                 {/*{this._createContent([{*/}
                     {/*Component: FormType,*/}
                     {/*name: 'type'*/}

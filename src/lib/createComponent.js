@@ -1,13 +1,13 @@
 import React from 'react';
 
-const createComponent = (className, tag = 'div') => props => (
-    React.createElement(
-        tag,
-        {
-            className: `${className}${className && props.className ? ' ' : ''}${props.className ? props.className : ''}`
-        },
-        props.children
-    )
-);
+const createComponent = (className, tag = 'div', options) => props => {
+    const props_ = {
+        className: `${className}${className && props.className ? ' ' : ''}${props.className ? props.className : ''}`,
+    };
+    if (options) {
+        if ("onClick" in options && options.onClick) props_.onClick = options.onClick;
+    }
+    return React.createElement(tag, props_, props.children);
+};
 
 export default createComponent;

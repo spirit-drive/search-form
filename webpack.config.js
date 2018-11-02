@@ -24,7 +24,7 @@ module.exports = (env, options) => {
         devtool: isDevMode && 'source-map',
         devServer: {
             overlay: true,
-            // host: '192.168.1.71',
+            host: '192.168.1.71',
         },
         plugins: [
             new Html({
