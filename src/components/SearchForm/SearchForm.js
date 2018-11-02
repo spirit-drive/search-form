@@ -41,17 +41,25 @@ class SearchForm extends Component {
     constructor(props) {
         super(props);
 
+        const founded = search();
+        const prices = founded.map(item => item.price);
+        this.price = {
+            min: Math.min(...prices),
+            max: Math.max(...prices),
+        };
+
+        const data = {
+            type: [],
+            price: null,
+            mortgage: false,
+            installment: false,
+        };
+
+        data.price = this.price;
+
         this.state = {
-            data: {
-                type: [],
-                price: {
-                    min: 0,
-                    max: 10 ** 20,
-                },
-                mortgage: false,
-                installment: false,
-            },
-            founded: []
+            data,
+            founded,
         };
     }
 
@@ -89,7 +97,7 @@ class SearchForm extends Component {
     onChange = (value, properties) => {
         const data = {...this.state.data};
         data[properties] = value;
-        console.log(data);
+        // console.log(data);
         // this.search(data, founded => this.setState({data, founded}));
 
         // this._search(data)
@@ -103,7 +111,8 @@ class SearchForm extends Component {
     };
 
     render () {
-        const {min, max} = this.state.data.price;
+        const {price} = this.state.data;
+        const {max, min} = this.price;
         return (
             <Form className={this.props.className}>
                 <div className="search-form__item">
@@ -116,8 +125,11 @@ class SearchForm extends Component {
                 </div>
                 <div className="search-form__item">
                     <PriceSlider
+                        onChange={this.onChange}
+                        values={price}
                         min={min}
                         max={max}
+                        name="price"
                     />
                 </div>
                 <div className="search-form__item">

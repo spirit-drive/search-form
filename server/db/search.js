@@ -35,6 +35,8 @@ const filter = (item, data) => {
         && checkInstallment(item, data);
 };
 
-const search = data => db.filter(item => filter(item, data));
+const search = data => {
+    return data ? db.filter(item => filter(item, data)) : db;
+};
 
 module.exports = search;

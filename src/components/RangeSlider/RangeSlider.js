@@ -29,17 +29,23 @@ class SliderBasis extends Component {
         this._addCloseWatchLeft();
     };
 
-    _getMouseLeft = e => {
-        const position = e.pageX - this.left;
+    _getValueFromPageX (pageX) {
+        const position = pageX - this.left;
         this._setValue(position);
-    };
+    }
+
+    _getMouseLeft = e => this._getValueFromPageX(e.pageX);
+
+    _getTouchLeft = e => this._getValueFromPageX(e.changedTouches[0].pageX);
 
     _addWatchLeft () {
         document.addEventListener('mousemove', this._getMouseLeft);
+        document.addEventListener('touchmove', this._getTouchLeft);
     }
 
     _removeWatchLeft () {
         document.removeEventListener('mousemove', this._getMouseLeft);
+        document.removeEventListener('touchmove', this._getTouchLeft);
     }
 
     _closeWatchLeft = () => {
@@ -49,10 +55,12 @@ class SliderBasis extends Component {
 
     _addCloseWatchLeft () {
         document.addEventListener('mouseup', this._closeWatchLeft);
+        document.addEventListener('touchend', this._closeWatchLeft);
     }
 
     _removeCloseWatchLeft () {
         document.removeEventListener('mouseup', this._closeWatchLeft);
+        document.removeEventListener('touchend', this._closeWatchLeft);
     }
 
 }
@@ -179,10 +187,11 @@ class RangeSlider extends SliderWithVisualLogic {
                         ref={elem => this.field = elem}
                         className="range-slider__field"
                         onMouseDown={this._moveRunner}
+                        onTouchStart={this._moveRunner}
                     >
                         <div style={this._setPositionRange(left, right)} className="range-slider__range"/>
-                        <button style={this._setPosition(left)} className="range-slider__runner range-slider__runner_left" />
-                        <button style={this._setPosition(right)} className="range-slider__runner range-slider__runner_right" />
+                        <div style={this._setPosition(left)} className="range-slider__runner range-slider__runner_left" />
+                        <div style={this._setPosition(right)} className="range-slider__runner range-slider__runner_right" />
                     </div>
                 </div>
                 <div className="range-slider__marks">

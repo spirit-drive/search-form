@@ -46,7 +46,7 @@ class PriceSlider extends Component {
     _setValues = values => {
         values = this._toLimitValues(values);
         this.setState({values});
-        this.props.liftUpState(values);
+        this.props.onChange(values, this.props.name);
     };
 
     render() {
@@ -64,7 +64,7 @@ class PriceSlider extends Component {
 PriceSlider.defaultProps = {
     min: 100,
     max: 2000,
-    liftUpState: state => console.log('PriceSlider', state),
+    onChange: state => console.log('PriceSlider', state),
 };
 
 export default PriceSlider;
