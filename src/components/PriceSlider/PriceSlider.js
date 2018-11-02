@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import createComponent from "../../lib/createComponent";
 import RangeSlider from "../RangeSlider/RangeSlider"
+import RangeInput from "../RangeInput/RangeInput"
 const PriceSlider_ = createComponent('price-slider');
 
 class PriceSlider extends Component {
@@ -8,6 +9,7 @@ class PriceSlider extends Component {
         const {min, max, values} = this.props;
         return (
             <PriceSlider_>
+                <RangeInput />
                 <RangeSlider edges={{left: min, right: max}} values={values}/>
             </PriceSlider_>
         )
