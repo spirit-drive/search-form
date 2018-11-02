@@ -7,7 +7,8 @@ import MultiSelect from "../MultiSelect/MultiSelect";
 import PriceSlider from "../PriceSlider/PriceSlider";
 import BigSwitcher from "../BigSwitcher/BigSwitcher";
 import Button from "../Button/Button";
-import search from "../../db/search";
+import search from "../../../server/db/search";
+import {url} from "../../setting";
 
 const listItems = [{
     value: false,
@@ -42,7 +43,7 @@ class SearchForm extends Component {
                 type: [],
                 price: {
                     min: 0,
-                    max: Infinity,
+                    max: 10 ** 20,
                 },
                 mortgage: false,
                 installment: false,
@@ -51,9 +52,33 @@ class SearchForm extends Component {
         };
     }
 
+    _search = data => new Promise(resolve => {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("post", `${url}/data`, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xhr.onload = () => {
+            resolve(xhr.responseText);
+        };
+        xhr.send("data=" + JSON.stringify(data));
+    });
+
+    search(data, func) {
+        this._search(data)
+            .then(res => JSON.parse(res))
+            .then(founded => {
+                func(founded);
+            });
+    }
+
     liftUpResult = e => {
         e.preventDefault();
         const data = search(this.state.data);
+        // this.search(this.state.data, founded => {
+        //     this.setState({founded});
+        //     this.props.liftUpResult(founded);
+        // });
         this.setState({founded: data});
         this.props.liftUpResult(data);
     };
@@ -62,6 +87,15 @@ class SearchForm extends Component {
         const data = {...this.state.data};
         data[properties] = value;
         console.log(data);
+        // this.search(data, founded => this.setState({data, founded}));
+
+        // this._search(data)
+        //     .then(res => JSON.parse(res))
+        //     .then(founded => {
+        //         // console.log(founded);
+        //         this.setState({data, founded});
+        //     });
+
         this.setState({data, founded: search(data)});
     };
 
@@ -82,16 +116,23 @@ class SearchForm extends Component {
     render () {
         return (
             <form className="search-form">
-                <MultiSelect
-                    onChange={this.onChange}
-                    name="type"
-                    placeholder='Кол-во комнат:'
-                    items={listItems}
-                />
-                <BigSwitcher
-                    onChange={this.onChange}
-                    data={this.state.data}
-                />
+                <div className="search-form__item">
+                    <MultiSelect
+                        onChange={this.onChange}
+                        name="type"
+                        placeholder='Кол-во комнат:'
+                        items={listItems}
+                    />
+                </div>
+                <div className="search-form__item">
+                    <BigSwitcher
+                        onChange={this.onChange}
+                        data={this.state.data}
+                    />
+                </div>
+                <div className="search-form__item">
+                    <Button onClick={this.liftUpResult} count={this.state.founded.length} />
+                </div>
 
                 {/*<PriceSlider />*/}
                 {/*{this._createContent([{*/}
@@ -107,7 +148,6 @@ class SearchForm extends Component {
                     {/*Component: FormInstallment,*/}
                     {/*name: 'installment'*/}
                 {/*}])}*/}
-                <Button onClick={this.liftUpResult} count={this.state.founded.length} />
             </form>
         )
     }

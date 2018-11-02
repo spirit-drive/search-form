@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "dev": "node ./server/app.js"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -33,6 +34,7 @@
     "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   }

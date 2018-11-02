@@ -1,7 +1,7 @@
-import db from "./db";
+const db = require("./db");
 
 const checkType = (item, data) => {
-    if (!data.type.length || !data.ty) return true;
+    if (!data.type.length || !data.type) return true;
     if (Array.isArray(data.type)) {
         for (let type of data.type) {
             if (item.type === type) return true;
@@ -37,4 +37,4 @@ const filter = (item, data) => {
 
 const search = data => db.filter(item => filter(item, data));
 
-export default search;
+module.exports = search;

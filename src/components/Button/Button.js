@@ -24,10 +24,19 @@ class Button extends Component {
 
     _getEnd(count) {
 
+        const dec = Math.floor((count / 10) % 10) * 10;
+        const number = Math.floor(count % 10);
+        const fullDec = dec + number;
+
+        console.log(dec);
+
+        if (fullDec >= 11 && fullDec <= 14) return declinations[2];
+
+
         let end;
-        if (count === 1) {
+        if (number === 1) {
             end = declinations[0];
-        } else if (count > 1 && count < 5) {
+        } else if (number > 1 && number < 5) {
             end = declinations[1];
         } else {
             end = declinations[2];
@@ -50,9 +59,5 @@ class Button extends Component {
         )
     }
 }
-
-// Button.defaultProps = {
-//     count: undefined
-// };
 
 export default Button;
