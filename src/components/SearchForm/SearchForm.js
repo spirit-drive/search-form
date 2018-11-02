@@ -81,32 +81,27 @@ class SearchForm extends Component {
             const {max, min} = this.price;
             return (
                 <Form className={this.props.className}>
-                    <div className="search-form__item">
-                        <MultiSelect
-                            onChange={this.onChange}
-                            name="type"
-                            placeholder='Кол-во комнат:'
-                            items={listItems}
-                        />
-                    </div>
-                    <div className="search-form__item">
-                        <PriceSlider
-                            onChange={this.onChange}
-                            values={price}
-                            min={min}
-                            max={max}
-                            name="price"
-                        />
-                    </div>
-                    <div className="search-form__item">
-                        <BigSwitcher
-                            onChange={this.onChange}
-                            data={this.state.data}
-                        />
-                    </div>
-                    <div className="search-form__item">
-                        <Button onClick={this.liftUpResult} count={this.state.founded.length}/>
-                    </div>
+                    <MultiSelect
+                        className="search-form__item"
+                        onChange={this.onChange}
+                        name="type"
+                        placeholder='Кол-во комнат:'
+                        items={listItems}
+                    />
+                    <PriceSlider
+                        className="search-form__item"
+                        onChange={this.onChange}
+                        values={price}
+                        min={min}
+                        max={max}
+                        name="price"
+                    />
+                    <BigSwitcher
+                        className="search-form__item"
+                        onChange={this.onChange}
+                        data={this.state.data}
+                    />
+                    <Button className="search-form__item" onClick={this.liftUpResult} count={this.state.founded.length}/>
 
                 </Form>
             );

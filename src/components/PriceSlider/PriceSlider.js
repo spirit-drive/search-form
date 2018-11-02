@@ -53,7 +53,7 @@ class PriceSlider extends Component {
         const {min, max} = this.props;
         const {values} = this.state;
         return (
-            <PriceSlider_>
+            <PriceSlider_ className={this.props.className}>
                 <RangeInput min={min} max={max} values={values} liftUpState={this._setValues}/>
                 <RangeSlider min={min} max={max} values={values} liftUpState={this._setValues}/>
             </PriceSlider_>
