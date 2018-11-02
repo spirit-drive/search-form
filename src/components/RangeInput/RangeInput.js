@@ -44,7 +44,7 @@ class RangeInput extends Component {
         values[key] = value;
         this.setState({values});
 
-        this.timeoutId = setTimeout(() => this.props.liftUpState(values), 1000);
+        this.timeoutId = setTimeout(() => this.props.liftUpState(values), this.props.timeout);
     };
 
 
@@ -61,6 +61,7 @@ class RangeInput extends Component {
 }
 
 RangeInput.defaultProps = {
+    timeout: 1000,
     min: 100,
     max: 1000,
     values: {
