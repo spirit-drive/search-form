@@ -34,18 +34,24 @@ class SliderBasis extends Component {
         this._setValue(position);
     }
 
-    _getMouseLeft = e => this._getValueFromPageX(e.pageX);
-
-    _getTouchLeft = e => this._getValueFromPageX(e.changedTouches[0].pageX);
+    _getMouseLeft = e => {
+        let pageX;
+        if ('changedTouches' in e) {
+            pageX = e.changedTouches[0].pageX;
+        } else {
+            pageX = e.pageX;
+        }
+        this._getValueFromPageX(pageX);
+    };
 
     _addWatchLeft () {
         document.addEventListener('mousemove', this._getMouseLeft);
-        document.addEventListener('touchmove', this._getTouchLeft);
+        document.addEventListener('touchmove', this._getMouseLeft);
     }
 
     _removeWatchLeft () {
         document.removeEventListener('mousemove', this._getMouseLeft);
-        document.removeEventListener('touchmove', this._getTouchLeft);
+        document.removeEventListener('touchmove', this._getMouseLeft);
     }
 
     _closeWatchLeft = () => {

@@ -7,10 +7,7 @@ import search from "../../../server/db/search";
 import {url} from "../../setting";
 import createComponent from "../../lib/createComponent";
 
-
-
 const Form = createComponent('search-form', 'form', {onSubmit: e => e.preventDefault()});
-
 
 const listItems = [{
     value: false,

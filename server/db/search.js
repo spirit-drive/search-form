@@ -1,10 +1,12 @@
 const db = require("./db");
 
 const checkType = (item, data) => {
-    if (!data.type.length || !data.type) return true;
+    if (!data.type.length || !data.type) {
+        return true;
+    }
     if (Array.isArray(data.type)) {
-        for (let type of data.type) {
-            if (item.type === type) return true;
+        for (let key in data.type) {
+            if (item.type === data.type[key]) return true;
         }
         return false;
     } else {
@@ -35,8 +37,6 @@ const filter = (item, data) => {
         && checkInstallment(item, data);
 };
 
-const search = data => {
-    return data ? db.filter(item => filter(item, data)) : db;
-};
+const search = data => data ? db.filter(item => filter(item, data)) : db;
 
 module.exports = search;

@@ -21,7 +21,8 @@ class Checkbox extends Component {
 
     _onChange = () => {
         const value = !this.state.value;
-        this.props.liftUpState({value, text: this.props.text});
+        const {text} = this.props;
+        this.props.liftUpState({value, text});
         this.setState({value});
     };
 
