@@ -57,34 +57,7 @@ class SliderBasis extends Component {
 
 }
 
-class RangeSlider extends SliderBasis {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            values: this._toLimitValues()
-        };
-
-    }
-
-    _toLimitValues () {
-        const {values, edges} = this.props;
-        const left = values.left > edges.left
-            ? values.left < edges.right
-                ? values.left
-                : edges.right
-            : edges.left;
-
-        const right = values.right < edges.right
-            ? values.right > edges.left
-                ? values.right
-                : edges.left
-            : edges.right;
-
-        return {left, right};
-    }
-
+class SliderWithVisualLogic extends SliderBasis {
     _getSizeRange () {
         const {right, left} = this.props.edges;
         return right - left;
@@ -155,7 +128,41 @@ class RangeSlider extends SliderBasis {
             width: this._toWrapInPercent(this._getWidth(_left, right))
         }
     }
+}
 
+class RangeSlider extends SliderWithVisualLogic {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            values: this._toLimitValues(props)
+        };
+
+    }
+
+    componentWillReceiveProps(props) {
+        const values = this._toLimitValues(props);
+        this.setState({values});
+    }
+
+
+    _toLimitValues (props) {
+        const {values, edges} = props;
+        const left = values.left > edges.left
+            ? values.left < values.right
+                ? values.left
+                : values.right
+            : edges.left;
+
+        const right = values.right < edges.right
+            ? values.right > values.left
+                ? values.right
+                : values.left
+            : edges.right;
+
+        return {left, right};
+    }
 
     render() {
         const {left, right} = this.state.values;

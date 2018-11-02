@@ -5,13 +5,56 @@ import InputNumber from "../InputNumber/InputNumber";
 const RangeInput_ = createComponent('range-input field h_1');
 
 class RangeInput extends Component {
+
+    constructor(props) {
+        super (props);
+
+        this.state = {
+            values: this._toLimitValues(props.values),
+        };
+
+    }
+
+    componentWillReceiveProps({values}) {
+        values = this._toLimitValues(values);
+        this.setState({values});
+    }
+
+    _toLimitValues (values) {
+        const {min, max} = this.props;
+        const left = values.left > min
+            ? values.left < values.right
+                ? values.left
+                : values.right
+            : min;
+
+        const right = values.right < max
+            ? values.right > values.left
+                ? values.right
+                : values.left
+            : max;
+
+        return {left, right};
+    }
+
+    onChange = key => value => {
+        clearTimeout(this.timeoutId);
+
+        const values = {...this.state.values};
+        values[key] = value;
+        this.setState({values});
+
+        this.timeoutId = setTimeout(() => this.props.liftUpState(values), 1000);
+    };
+
+
     render() {
-        const {min, max, values} = this.props;
+        const {values} = this.state;
         return (
             <RangeInput_>
-                <InputNumber className="range-input__input range-input__input_left" value={this.props.values.left}/>
+                <InputNumber onChange={this.onChange('left')} className="range-input__input range-input__input_left" value={values.left}/>
                 <span className="range-input__separator">—</span>
-                <InputNumber value={this.props.values.right}/>
+                <InputNumber onChange={this.onChange('right')} value={values.right}/>
             </RangeInput_>
         )
     }
@@ -22,7 +65,7 @@ RangeInput.defaultProps = {
     max: 1000,
     values: {
         left: 100,
-        right: 550,
+        right: 1000,
     },
     liftUpState: state => console.log('RangeInput', state),
 };

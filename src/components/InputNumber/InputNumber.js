@@ -5,10 +5,16 @@ class InputNumber extends Component {
         super(props);
 
         this.state = {
-            value: this.props.value
+            value: this._getBeautifulValue(this.props.value)
         }
 
     }
+
+    componentWillReceiveProps({value}) {
+        value = this._getBeautifulValue(value);
+        this.setState({value});
+    }
+
 
     _getClass () {
         return `input-number${this.props.className ? ` ${this.props.className}` : ''}`
@@ -18,10 +24,14 @@ class InputNumber extends Component {
         return value === '' ? '' : Number(value).toLocaleString('ru-Ru', {useGrouping: true});
     }
 
+    _getNumber (value) {
+        return +value.replace(/[^\d]/g, '');
+    }
+
     _onChange = e => {
         const value = this._getBeautifulValue(e.currentTarget.value.replace(/[^\d]/g, ''));
         this.setState({value});
-        this.props.liftUpState(value);
+        this.props.onChange(this._getNumber(value));
     };
 
     render() {
@@ -38,7 +48,7 @@ class InputNumber extends Component {
 
 InputNumber.defaultProps = {
     value: '',
-    liftUpState: state => console.log('InputNumber', state),
+    onChange: state => console.log('InputNumber', state),
 };
 
 export default InputNumber;
