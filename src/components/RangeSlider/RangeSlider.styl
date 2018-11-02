@@ -11,6 +11,7 @@
     background-color: color3
 
   &__range
+    position: absolute
     width: 50%
     height: 100%
     background-color: color2
@@ -22,19 +23,25 @@
     square(18px)
     border none
     border-radius 100%
+    outline: none
     background-color: color2
     transform translate(-50%, -50%)
+
+    &:hover
+    &:active
+      box-shadow: 0 0 5px color4;
 
     &_left
       left: 0
 
     &_right
-      right: 0
+      left: 100%
 
 
   &__marks
     padding-top: 4px
     font-size: 10px
+    overflow: hidden
 
   &__mark
     &_left

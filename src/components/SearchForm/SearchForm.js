@@ -9,7 +9,7 @@ import createComponent from "../../lib/createComponent";
 
 
 
-const Form = createComponent('search-form', 'form');
+const Form = createComponent('search-form', 'form', {onSubmit: e => e.preventDefault()});
 
 
 const listItems = [{
