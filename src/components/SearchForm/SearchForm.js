@@ -3,34 +3,11 @@ import MultiSelect from "../MultiSelect/MultiSelect";
 import PriceSlider from "../PriceSlider/PriceSlider";
 import BigSwitcher from "../BigSwitcher/BigSwitcher";
 import Button from "../Button/Button";
-import {url} from "../../setting";
+import {url, listItems} from "../../setting";
+import {Promise} from 'es6-promise-polyfill';
 import createComponent from "../../lib/createComponent";
 
 const Form = createComponent('search-form', 'form', {onSubmit: e => e.preventDefault()});
-
-const listItems = [{
-    value: false,
-    text: 'Студия',
-}, {
-    value: false,
-    text: '1-комнатная',
-}, {
-    value: false,
-    text: '2-комнатная',
-}, {
-    value: false,
-    text: '3-комнатная',
-}, {
-    value: false,
-    text: '4-комнатная',
-}, {
-    value: false,
-    text: '5-комнатная',
-}, {
-    value: false,
-    text: '6-комнатная',
-}];
-
 
 class SearchForm extends Component {
 
@@ -71,9 +48,7 @@ class SearchForm extends Component {
         xhr.open("post", `${url}/data`, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        xhr.onload = () => {
-            resolve(xhr.responseText);
-        };
+        xhr.onload = () => resolve(xhr.responseText);
         xhr.send("data=" + JSON.stringify(data));
     });
 
