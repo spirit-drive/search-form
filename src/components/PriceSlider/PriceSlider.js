@@ -12,27 +12,42 @@ class PriceSlider extends Component {
         this.state = {
             values: this._toLimitValues(this.props.values)
         };
-
     }
+
+    componentWillReceiveProps({values}) {
+        values = this._toLimitValues(values);
+        this.setState({values});
+    }
+
 
     _toLimitValues (values) {
         const {min, max} = this.props;
-        const left = values.left > min
-            ? values.left < values.right
-                ? values.left
-                : values.right
-            : min;
+        let left, right;
+        if (values) {
+            left = values.min > min
+                ? values.min < values.max
+                    ? values.min
+                    : values.max
+                : min;
 
-        const right = values.right < max
-            ? values.right > values.left
-                ? values.right
-                : values.left
-            : max;
+            right = values.max < max
+                ? values.max > values.min
+                    ? values.max
+                    : values.min
+                : max;
+        } else {
+            left = min;
+            right = max;
+        }
 
-        return {left, right};
+        return {min: left, max: right};
     }
 
-    _setValues = values => this.setState({values: this._toLimitValues(values)});
+    _setValues = values => {
+        values = this._toLimitValues(values);
+        this.setState({values});
+        this.props.liftUpState(values);
+    };
 
     render() {
         const {min, max} = this.props;
@@ -40,7 +55,7 @@ class PriceSlider extends Component {
         return (
             <PriceSlider_>
                 <RangeInput min={min} max={max} values={values} liftUpState={this._setValues}/>
-                <RangeSlider edges={{left: min, right: max}} values={values} liftUpState={this._setValues}/>
+                <RangeSlider min={min} max={max} values={values} liftUpState={this._setValues}/>
             </PriceSlider_>
         )
     }
@@ -49,10 +64,6 @@ class PriceSlider extends Component {
 PriceSlider.defaultProps = {
     min: 100,
     max: 2000,
-    values: {
-        left: 100,
-        right: 550,
-    },
     liftUpState: state => console.log('PriceSlider', state),
 };
 

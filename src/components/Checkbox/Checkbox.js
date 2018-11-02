@@ -14,6 +14,11 @@ class Checkbox extends Component {
         }
     }
 
+    componentWillReceiveProps({value}) {
+        this.setState({value});
+    }
+
+
     _onChange = () => {
         const value = !this.state.value;
         this.props.liftUpState({value, text: this.props.text});

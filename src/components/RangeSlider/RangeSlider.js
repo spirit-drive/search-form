@@ -59,12 +59,12 @@ class SliderBasis extends Component {
 
 class SliderWithVisualLogic extends SliderBasis {
     _getSizeRange () {
-        const {right, left} = this.props.edges;
-        return right - left;
+        const {max, min} = this.props;
+        return max - min;
     }
 
     _getPosition (value) {
-        const shift = value - this.props.edges.left;
+        const shift = value - this.props.min;
         return shift / this._getSizeRange() * 100;
     }
 
@@ -91,33 +91,33 @@ class SliderWithVisualLogic extends SliderBasis {
     }
 
     _liftUpState (values) {
-        let {left, right} = values;
+        let {min, max} = values;
         this.props.liftUpState({
-            left: Math.round(left),
-            right: Math.round(right)
+            min: Math.round(min),
+            max: Math.round(max)
         });
     }
 
     _getValue (position) {
-        return this._getPositionInPercent(position) * this._getSizeRange() + this.props.edges.left;
+        return this._getPositionInPercent(position) * this._getSizeRange() + this.props.min;
     }
 
     _setValue (position) {
         const value = this._getValue(position);
-        const {left, right} = this.state.values;
-        const dL = value - left;
-        const dR = right - value;
+        const {min, max} = this.state.values;
+        const dL = value - min;
+        const dR = max - value;
         const values = {...this.state.values};
 
-        values[dR > dL ? 'left' : 'right'] = value;
+        values[dR > dL ? 'min' : 'max'] = value;
         this._liftUpState(values);
         this.setState({values});
     }
 
     _getWidth (left, right) {
         const d = right - left;
-        const {left: _left, right: _right} = this.props.edges;
-        const size = _right - _left;
+        const {min, max} = this.props;
+        const size = max - min;
         return d / size * 100;
     }
 
@@ -148,24 +148,30 @@ class RangeSlider extends SliderWithVisualLogic {
 
 
     _toLimitValues (props) {
-        const {values, edges} = props;
-        const left = values.left > edges.left
-            ? values.left < values.right
-                ? values.left
-                : values.right
-            : edges.left;
+        const {values, min, max} = props;
+        const left = values.min > min
+            ? values.min < values.max
+                ? values.min
+                : values.max
+            : min;
 
-        const right = values.right < edges.right
-            ? values.right > values.left
-                ? values.right
-                : values.left
-            : edges.right;
+        const right = values.max < max
+            ? values.max > values.min
+                ? values.max
+                : values.min
+            : max;
 
-        return {left, right};
+        return {min: left, max: right};
     }
 
+    _getBeautifulValue (value) {
+        return Number(value).toLocaleString('ru-Ru', {useGrouping: true});
+    }
+
+
     render() {
-        const {left, right} = this.state.values;
+        const {min: left, max: right} = this.state.values;
+        const {min, max} = this.props;
         return (
             <RangeSlider_ className={this.props.className}>
                 <div className="range-slider__wrapper">
@@ -180,8 +186,8 @@ class RangeSlider extends SliderWithVisualLogic {
                     </div>
                 </div>
                 <div className="range-slider__marks">
-                    <span className="range-slider__mark range-slider__mark_left">{this.props.edges.left}</span>
-                    <span className="range-slider__mark range-slider__mark_right">{this.props.edges.right}</span>
+                    <span className="range-slider__mark range-slider__mark_left">{this._getBeautifulValue(min)}</span>
+                    <span className="range-slider__mark range-slider__mark_right">{this._getBeautifulValue(max)}</span>
                 </div>
             </RangeSlider_>
         )
@@ -189,13 +195,11 @@ class RangeSlider extends SliderWithVisualLogic {
 }
 
 RangeSlider.defaultProps = {
-    edges: {
-        left: 10,
-        right: 100,
-    },
+    min: 10,
+    max: 100,
     values: {
-        left: 0,
-        right: 55,
+        min: 0,
+        max: 55,
     },
     liftUpState: state => console.log('RangeSlider', state),
 };

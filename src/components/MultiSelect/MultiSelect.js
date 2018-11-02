@@ -52,7 +52,7 @@ class MultiSelect extends Component {
     reset = () => {
         const value = this.state.value.map(item => ({value: false, text: item.text}));
         this._change(value);
-        this.setState({value, isOpen: false});
+        this.setState({value});
     };
 
 

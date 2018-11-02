@@ -22,19 +22,19 @@ class RangeInput extends Component {
 
     _toLimitValues (values) {
         const {min, max} = this.props;
-        const left = values.left > min
-            ? values.left < values.right
-                ? values.left
-                : values.right
+        const left = values.min > min
+            ? values.min < values.max
+                ? values.min
+                : values.max
             : min;
 
-        const right = values.right < max
-            ? values.right > values.left
-                ? values.right
-                : values.left
+        const right = values.max < max
+            ? values.max > values.min
+                ? values.max
+                : values.min
             : max;
 
-        return {left, right};
+        return {min: left, max: right};
     }
 
     onChange = key => value => {
@@ -52,9 +52,9 @@ class RangeInput extends Component {
         const {values} = this.state;
         return (
             <RangeInput_>
-                <InputNumber onChange={this.onChange('left')} className="range-input__input range-input__input_left" value={values.left}/>
+                <InputNumber onChange={this.onChange('min')} className="range-input__input range-input__input_left" value={values.min}/>
                 <span className="range-input__separator">—</span>
-                <InputNumber onChange={this.onChange('right')} value={values.right}/>
+                <InputNumber onChange={this.onChange('max')} value={values.max}/>
             </RangeInput_>
         )
     }
@@ -64,8 +64,8 @@ RangeInput.defaultProps = {
     min: 100,
     max: 1000,
     values: {
-        left: 100,
-        right: 1000,
+        min: 100,
+        max: 1000,
     },
     liftUpState: state => console.log('RangeInput', state),
 };

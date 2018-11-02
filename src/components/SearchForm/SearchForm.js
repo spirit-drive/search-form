@@ -103,6 +103,7 @@ class SearchForm extends Component {
     };
 
     render () {
+        const {min, max} = this.state.data.price;
         return (
             <Form className={this.props.className}>
                 <div className="search-form__item">
@@ -114,7 +115,10 @@ class SearchForm extends Component {
                     />
                 </div>
                 <div className="search-form__item">
-                    <PriceSlider />
+                    <PriceSlider
+                        min={min}
+                        max={max}
+                    />
                 </div>
                 <div className="search-form__item">
                     <BigSwitcher
