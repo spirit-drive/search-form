@@ -7,7 +7,7 @@ import {url, listItems} from "../../setting";
 import {Promise} from 'es6-promise-polyfill';
 import createComponent from "../../lib/createComponent";
 
-const Form = createComponent('search-form', 'form', {onSubmit: e => e.preventDefault()});
+const SearchForm_ = createComponent('search-form', 'form', {onSubmit: e => e.preventDefault()});
 
 class SearchForm extends Component {
 
@@ -80,7 +80,7 @@ class SearchForm extends Component {
             const {price} = this.state.data;
             const {max, min} = this.price;
             return (
-                <Form className={this.props.className}>
+                <SearchForm_ className={this.props.className}>
                     <MultiSelect
                         className="search-form__item"
                         onChange={this.onChange}
@@ -103,7 +103,7 @@ class SearchForm extends Component {
                     />
                     <Button className="search-form__item" onClick={this.liftUpResult} count={this.state.founded.length}/>
 
-                </Form>
+                </SearchForm_>
             );
         }
 

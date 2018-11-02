@@ -11,16 +11,9 @@ class App extends Component {
             data: [],
         };
 
-        this.setData = this.setData.bind(this);
     }
 
-    _toPrepareData (data) {
-        return JSON.stringify(data, null, "  ");
-    }
-
-    setData (data) {
-        this.setState({data});
-    }
+    setData = data => this.setState({data});
 
     render () {
         return (
