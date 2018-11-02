@@ -4,9 +4,13 @@ const createComponent = (className, tag = 'div', options) => props => {
     const props_ = {
         className: `${className}${className && props.className ? ' ' : ''}${props.className ? props.className : ''}`,
     };
-    if (options) {
-        if ("onClick" in options && options.onClick) props_.onClick = options.onClick;
-        if ("onSubmit" in options && options.onSubmit) props_.onSubmit = options.onSubmit;
+
+    if (options && typeof options === 'object') {
+        for (let key in options) {
+            if (options.hasOwnProperty(key)) {
+                props_[key] = options[key];
+            }
+        }
     }
     return React.createElement(tag, props_, props.children);
 };

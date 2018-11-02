@@ -63,11 +63,26 @@ class RangeSlider extends SliderBasis {
         super(props);
 
         this.state = {
-            values: {
-                left: this.props.values.left,
-                right: this.props.values.right,
-            }
+            values: this._toLimitValues()
         };
+
+    }
+
+    _toLimitValues () {
+        const {values, edges} = this.props;
+        const left = values.left > edges.left
+            ? values.left < edges.right
+                ? values.left
+                : edges.right
+            : edges.left;
+
+        const right = values.right < edges.right
+            ? values.right > edges.left
+                ? values.right
+                : edges.left
+            : edges.right;
+
+        return {left, right};
     }
 
     _getSizeRange () {
@@ -172,10 +187,10 @@ RangeSlider.defaultProps = {
         right: 100,
     },
     values: {
-        left: 10,
-        right: 50,
+        left: 0,
+        right: 55,
     },
-    liftUpState: state => console.log(state),
+    liftUpState: state => console.log('RangeSlider', state),
 };
 
 export default RangeSlider;
