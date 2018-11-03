@@ -18,9 +18,6 @@ app.use(express.static(pathDist));
 
 app.post('/data', urlencodedParser, (req, res) => {
     const found = JSON.stringify(search(JSON.parse(req.body.data)));
-    // console.log(found);
-    // console.log(req);
-    // console.log(res);
     res.send(found);
 });
 

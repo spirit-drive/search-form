@@ -34,15 +34,21 @@ class SliderWithVisualLogic extends SliderBasis {
     }
 
     _liftUpState (values) {
-        let {min, max} = values;
-        this.props.liftUpState({
-            min: Math.round(min),
-            max: Math.round(max)
-        });
+        this.props.liftUpState(this._roundValues(values));
     }
 
     _getValue (position) {
         return this._getPositionInPercent(position) * this._getSizeRange() + this.props.min;
+    }
+
+    _roundValues(values) {
+        const _values = {...values};
+        for (let key in _values) {
+            if (_values.hasOwnProperty(key) && typeof _values[key] === 'number') {
+                _values[key] = Math.round(_values[key]);
+            }
+        }
+        return _values;
     }
 
     _setValue (position) {
@@ -86,7 +92,8 @@ class SliderWithVisualLogic extends SliderBasis {
     };
 
     _moveRunnerWithArrowInside = (type, vector = 1) => {
-        const {step, min, max, acceleration} = this.props;
+        let {step, min, max, acceleration} = this.props;
+        acceleration = acceleration || step;
         const k = this._isShift ? acceleration : 1;
         let values = {...this.state.values};
         values[type] = Math.round(values[type]) + vector * step * k;
@@ -96,20 +103,32 @@ class SliderWithVisualLogic extends SliderBasis {
     };
 
     _moveRunnerWithArrow = type => e => {
-        if (e.keyCode === 16) this._isShift = true;
-        switch (e.keyCode) {
-            case 39:
-                this._moveRunnerWithArrowInside(type);
-                break;
 
-            case 37:
-                this._moveRunnerWithArrowInside(type, -1);
-                break;
-
+        if (e.keyCode === 16) {
+            e.preventDefault();
+            this._isShift = true;
+            const vector = this._isRight
+                ? 1
+                : this._isLeft
+                    ? -1
+                    : 0;
+            if (vector) this._moveRunnerWithArrowInside(type, vector);
 
         }
+
+        if (e.keyCode === 39) {
+            this._isRight = true;
+            this._moveRunnerWithArrowInside(type);
+        }
+
+        if (e.keyCode === 37) {
+            this._isLeft = true;
+            this._moveRunnerWithArrowInside(type, -1);
+        }
+
     };
 
+    forLinks = e => e.preventDefault();
 
     _addWindowKeyDown (func) {
         window.addEventListener('keydown', func);
@@ -119,8 +138,10 @@ class SliderWithVisualLogic extends SliderBasis {
         window.removeEventListener('keydown', func);
     }
 
-    _resetCombinationKey = () => {
-        this._isShift = false;
+    _resetCombinationKey = e => {
+        if (e.keyCode === 16) this._isShift = false;
+        if (e.keyCode === 39) this._isRight = false;
+        if (e.keyCode === 37) this._isLeft = false;
     };
 
     _addWindowKeyUp () {

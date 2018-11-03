@@ -55,7 +55,7 @@ class PriceSlider extends Component {
         return (
             <PriceSlider_ className={this.props.className}>
                 <RangeInput min={min} max={max} values={values} liftUpState={this._setValues}/>
-                <RangeSlider min={min} max={max} values={values} liftUpState={this._setValues}/>
+                <RangeSlider step={this.props.step} acceleration={this.props.acceleration} min={min} max={max} values={values} liftUpState={this._setValues}/>
             </PriceSlider_>
         )
     }

@@ -52,14 +52,18 @@ class RangeSlider extends SliderWithVisualLogic {
                     >
                         <div style={this._setPositionRange(left, right)} className="range-slider__range"/>
                         <a
-                            href="#"
+                            href=""
+                            onClick={this.forLinks}
+                            onDragStart={this.forLinks}
                             onFocus={this.onFocusRunner('min')}
                             onBlur={this.onBlurRunner}
                             style={this._setPositionRunner(left)}
                             className="range-slider__runner range-slider__runner_left"
                         />
                         <a
-                            href="#"
+                            href=""
+                            onClick={this.forLinks}
+                            onDragStart={this.forLinks}
                             onFocus={this.onFocusRunner('max')}
                             onBlur={this.onBlurRunner}
                             style={this._setPositionRunner(right)}
@@ -77,7 +81,7 @@ class RangeSlider extends SliderWithVisualLogic {
 }
 
 RangeSlider.defaultProps = {
-    acceleration: 1000,
+    acceleration: 10,
     step: 1000,
     min: 10,
     max: 100,

@@ -79,6 +79,8 @@ class SearchForm extends Component {
         if (this.state.data) {
             const {price} = this.state.data;
             const {max, min} = this.price;
+            const step = (max - min) / 1000;
+            const acceleration = 10;
             return (
                 <SearchForm_ className={this.props.className}>
                     <MultiSelect
@@ -92,6 +94,8 @@ class SearchForm extends Component {
                         className="search-form__item"
                         onChange={this.onChange}
                         values={price}
+                        step={step}
+                        acceleration={acceleration}
                         min={min}
                         max={max}
                         name="price"
