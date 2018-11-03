@@ -1,10 +1,17 @@
 const express    = require('express');
 const path       = require('path');
 const bodyParser = require("body-parser");
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
 const search     = require('./db/search');
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 const app = express();
+const config = require('../webpack.config.js');
+const compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+}));
 
 const pathDist     = path.join(process.cwd(), 'dist');
 app.use(express.static(pathDist));
