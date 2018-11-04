@@ -24,11 +24,10 @@ class Button extends Component {
 
     _getEnd(count) {
 
-        const dec = Math.floor((count / 10) % 10) * 10;
+        const dec = Math.floor(count % 100);
         const number = Math.floor(count % 10);
-        const fullDec = dec + number;
 
-        if (fullDec >= 11 && fullDec <= 14) return declinations[2];
+        if (dec >= 11 && dec <= 14) return declinations[2];
 
 
         return number === 1

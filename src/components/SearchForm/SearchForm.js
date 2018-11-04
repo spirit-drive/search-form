@@ -104,6 +104,13 @@ class SearchForm extends Component {
                         className="search-form__item"
                         onChange={this.onChange}
                         data={this.state.data}
+                        switchers={[{
+                            text: 'Ипотека',
+                            name: 'mortgage',
+                        }, {
+                            text: 'Рассрочка',
+                            name: 'installment',
+                        }]}
                     />
                     <Button className="search-form__item" onClick={this.liftUpResult} count={this.state.founded.length}/>
 

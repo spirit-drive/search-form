@@ -7,22 +7,17 @@ class BigSwitcher extends Component {
     render () {
         return (
             <BigSwitcher_ className={this.props.className}>
-                <Switcher
-                    className="big-switcher__children switcher-mortgage"
-                    liftUpState={this.props.onChange}
-                    value={this.props.data.mortgage}
-                    name="mortgage"
-                >
-                    <p>Ипотека</p>
-                </Switcher>
-                <Switcher
-                    className="big-switcher__children switcher-installment"
-                    liftUpState={this.props.onChange}
-                    value={this.props.data.installment}
-                    name="installment"
-                >
-                    <p>Рассрочка</p>
-                </Switcher>
+                {this.props.switchers.map((item, i) => (
+                    <Switcher
+                        key={`BigSwitcher_Switcher_rj38f3_${i}`}
+                        className={`big-switcher__children switcher-${item.name}`}
+                        liftUpState={this.props.onChange}
+                        value={this.props.data[item.name]}
+                        name={item.name}
+                    >
+                        <p>{item.text}</p>
+                    </Switcher>
+                ))}
             </BigSwitcher_>
         )
     }
