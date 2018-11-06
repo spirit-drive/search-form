@@ -5,6 +5,7 @@ import Switcher from "../Switcher/Switcher";
 
 class BigSwitcher extends Component {
     render () {
+        const width = 100 / this.props.switchers.length;
         return (
             <BigSwitcher_ className={this.props.className}>
                 {this.props.switchers.map((item, i) => (
@@ -14,6 +15,7 @@ class BigSwitcher extends Component {
                         liftUpState={this.props.onChange}
                         value={this.props.data[item.name]}
                         name={item.name}
+                        width={width}
                     >
                         <p>{item.text}</p>
                     </Switcher>

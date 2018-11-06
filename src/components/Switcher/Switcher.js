@@ -10,7 +10,7 @@ class Switcher extends Component {
             value: this.props.value
         };
 
-        this.Component = createComponent('switcher h_1', 'div', {onClick: this._onChange});
+        this.Component = createComponent('switcher h_1', 'div', {onClick: this._onChange, style: {width: `${this.props.width}%`}});
     }
 
     _onChange = () => {

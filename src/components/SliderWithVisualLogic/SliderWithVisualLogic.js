@@ -56,7 +56,7 @@ class SliderWithVisualLogic extends SliderBasis {
         const {min, max} = this.state.values;
         const dL = value - min;
         const dR = max - value;
-        const values = {...this.state.values};
+        let values = {...this.state.values};
 
         values[dR > dL ? 'min' : 'max'] = value;
         this._liftUpState(values);
