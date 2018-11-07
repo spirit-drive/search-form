@@ -128,8 +128,6 @@ class SliderWithVisualLogic extends SliderBasis {
 
     };
 
-    forLinks = e => e.preventDefault();
-
     _addWindowKeyDown (func) {
         window.addEventListener('keydown', func);
     }

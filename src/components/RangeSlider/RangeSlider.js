@@ -51,19 +51,13 @@ class RangeSlider extends SliderWithVisualLogic {
                         onTouchStart={this._moveRunner}
                     >
                         <div style={this._setPositionRange(left, right)} className="range-slider__range"/>
-                        <a
-                            href=""
-                            onClick={this.forLinks}
-                            onDragStart={this.forLinks}
+                        <button
                             onFocus={this.onFocusRunner('min')}
                             onBlur={this.onBlurRunner}
                             style={this._setPositionRunner(left)}
                             className="range-slider__runner range-slider__runner_left"
                         />
-                        <a
-                            href=""
-                            onClick={this.forLinks}
-                            onDragStart={this.forLinks}
+                        <button
                             onFocus={this.onFocusRunner('max')}
                             onBlur={this.onBlurRunner}
                             style={this._setPositionRunner(right)}
