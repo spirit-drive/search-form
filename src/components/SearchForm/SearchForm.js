@@ -21,7 +21,7 @@ class SearchForm extends Component {
 
     }
 
-    componentWillMount () {
+    componentDidMount () {
         this.search(null, founded => {
             const prices = founded.map(item => item.price);
             this.price = {
